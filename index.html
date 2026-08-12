@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIMESTEALER Entertainment</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Gowun+Batang:wght@400;700&family=Hi+Melody&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:ital,wght@0,300;0,400;0,600;1,300&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Global Styles */
+    :root {
+      --bg-color: #0b0c0e;
+      --card-bg: #14171d;
+      --accent-color: #e5c158;
+      --text-main: #f0f2f5;
+      --text-sub: #a0a5b0;
+      --border-color: #22262f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { width: 100%; height: 100%; overflow-x: hidden; font-family: 'Poppins', 'Noto Sans KR', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header / Navigation */
+    header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: linear-gradient(to bottom, rgba(11, 12, 14, 0.95) 0%, rgba(11, 12, 14, 0) 100%); z-index: 100; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; transition: opacity 0.3s ease; }
+    .nav-logo:hover { opacity: 0.9; }
+    .nav-logo i { color: #f59e0b; font-size: 1.8rem; animation: spinSlow 8s linear infinite; }
+    .nav-logo span { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(to right, #fbbf24, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    nav ul { display: flex; list-style: none; gap: 30px; }
+    nav a { font-size: 0.9rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-sub); transition: color 0.3s ease; cursor: pointer; }
+    nav a.active, nav a:hover { color: var(--accent-color); }
+
+    /* Page Sections */
+    .page-section { display: none; width: 100vw; min-height: 100vh; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .page-section.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.99); } to { opacity: 1; transform: scale(1); } }
+
+    /* 1. HOME SECTION (슬로건 복원 및 시시각각 가독성 선명화) */
+    #home { position: relative; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; height: 100vh; overflow: hidden; }
+    .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+    .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 12, 14, 0.55); z-index: 2; }
+    
+    .hero-slogan-box {
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: sloganFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.2s;
+    }
+    @keyframes sloganFadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: 10px;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 0 15px rgba(0, 0, 0, 0.8);
+    }
+    .hero-slogan-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.95), 0 0 12px rgba(229, 193, 88, 0.3);
+    }
+    .hero-slogan-sub {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1.05rem;
+      color: rgba(240, 242, 245, 0.95);
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    /* 2. ABOUT SECTION */
+    #about { padding: 140px 8% 80px 8%; align-items: center; justify-content: center; background-color: var(--bg-color); }
+    .story-container { max-width: 1100px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 50px; align-items: flex-start; }
+    .story-image-box { position: relative; width: 100%; max-width: 380px; height: 365px; margin: 55px auto 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
+    .story-image-box img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: filter 0.5s ease, transform 0.7s ease; }
+    .story-image-box:hover img { filter: grayscale(0%); transform: scale(1.03); }
+    .story-text-box { display: flex; flex-direction: column; justify-content: center; }
+    .story-title { font-family: 'Cinzel', serif; font-size: 2.8rem; font-weight: 700; letter-spacing: 4px; color: var(--text-main); margin-bottom: 8px; }
+    .story-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: var(--accent-color); letter-spacing: 1.5px; margin-bottom: 30px; }
+    .story-body { font-family: 'Noto Sans KR', sans-serif; font-size: 0.98rem; font-weight: 300; color: #e2e8f0; line-height: 1.95; letter-spacing: -0.2px; }
+    .story-body p { margin-bottom: 20px; word-break: keep-all; }
+    .story-signature { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(229, 193, 88, 0.25); display: flex; flex-direction: column; align-items: flex-start; }
+    .ceo-name { font-size: 1.25rem; font-weight: 600; color: var(--text-main); letter-spacing: 2px; margin-bottom: 4px; }
+    .ceo-title { font-size: 0.85rem; color: var(--accent-color); letter-spacing: 1px; font-weight: 400; }
+
+    /* 2.5. ARTISTS SECTION */
+    #artists {
+      padding: 140px 6% 100px 6%; flex-direction: column; align-items: center; justify-content: flex-start;
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(11, 12, 14, 0.88), rgba(11, 12, 14, 0.88)), url("아티스트 카테고리 배경.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .artists-container { max-width: 1320px; width: 100%; margin: 0 auto; }
+    .artist-grid { display: flex; flex-wrap: wrap; gap: 55px; justify-content: center; }
+    .artist-card { display: flex; flex-direction: column; align-items: center; width: 220px; cursor: pointer; }
+    .artist-photo-box {
+      width: 220px; height: 220px; border-radius: 50%; overflow: hidden; margin-bottom: 22px;
+      border: 2px solid var(--border-color); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+    .artist-photo-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .artist-card:hover .artist-photo-box { transform: translateY(-10px); border-color: var(--accent-color); }
+    .artist-card:hover .artist-photo-box img { transform: scale(1.1); }
+    .artist-name { font-size: 1.1rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-main); }
+
+    .artist-modal-overlay {
+      position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center;
+      background: rgba(11, 12, 14, 0.88); backdrop-filter: blur(14px); padding: 20px;
+    }
+    .artist-modal-overlay.active { display: flex; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .artist-modal-box {
+      position: relative; max-width: 480px; width: 100%; background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 55px 45px; text-align: center; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+    }
+    .artist-modal-photo {
+      width: 100%; max-width: 320px; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden;
+      margin: 0 auto 28px auto; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+    .artist-modal-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .artist-modal-name { font-family: 'Cinzel', serif; font-size: 1.9rem; letter-spacing: 3px; color: var(--text-main); }
+
+    /* 3. MUSIC & MEDIA SECTION */
+    #music {
+      padding: 140px 6% 100px 6%; flex-direction: column; align-items: center; justify-content: flex-start;
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(11, 12, 14, 0.88), rgba(11, 12, 14, 0.88)), url("MUSIC & MEDIA 카테고리 뒷배경.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .music-container { max-width: 1320px; width: 100%; margin: 0 auto; }
+    .section-header-box { text-align: center; margin-bottom: 60px; }
+    .artistic-title { font-family: 'Cinzel', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 12px; text-transform: uppercase; color: #fffef5; margin-bottom: 12px; text-shadow: 0 0 5px rgba(255, 255, 255, 0.9), 0 0 10px rgba(229, 193, 88, 0.8); }
+    .artistic-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.35rem; font-weight: 500; color: rgba(240, 242, 245, 0.75); letter-spacing: 4px; position: relative; display: inline-block; padding-bottom: 18px; }
+    .artistic-subtitle::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 1px; background: rgba(229, 193, 88, 0.7); }
+
+    .album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 100%; }
+    .album-card { display: flex; flex-direction: column; cursor: pointer; }
+    .album-cover-box { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background-color: var(--card-bg); border: 1px solid var(--border-color); margin-bottom: 20px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55); }
+    .album-cover-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .album-card:hover .album-cover-box img { transform: scale(1.08); }
+    .album-overlay { position: absolute; inset: 0; background: rgba(11, 12, 14, 0.78); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
+    .album-card:hover .album-overlay { opacity: 1; }
+    .album-btn { padding: 10px 22px; border-radius: 24px; font-size: 0.95rem; font-weight: 600; border: 1px solid var(--accent-color); color: var(--accent-color); transition: all 0.3s ease; }
+    .album-btn:hover { background: var(--accent-color); color: #0b0c0e; }
+    .album-info { display: flex; flex-direction: column; gap: 6px; }
+    .album-type { font-size: 0.88rem; font-weight: 600; color: var(--accent-color); letter-spacing: 1.5px; text-transform: uppercase; }
+    .album-title { font-size: 1.38rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .album-date { font-size: 0.95rem; color: var(--text-sub); font-weight: 300; }
+
+    /* 4. CONTACT SECTION */
+    #contact {
+      padding: 140px 6% 100px 6%; flex-direction: column; align-items: center; justify-content: flex-start;
+      background-color: var(--bg-color);
+      background-image: linear-gradient(rgba(11, 12, 14, 0.88), rgba(11, 12, 14, 0.88)), url("CONTACT 카테고리 뒷배경.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .contact-container { max-width: 900px; width: 100%; margin: 0 auto; }
+    .contact-tabs { display: flex; gap: 16px; margin-bottom: 45px; justify-content: center; flex-wrap: wrap; }
+    .contact-tab {
+      padding: 14px 30px; border-radius: 30px; border: 1px solid var(--border-color); background: var(--card-bg);
+      color: var(--text-sub); font-size: 0.92rem; font-weight: 600; letter-spacing: 1px; cursor: pointer;
+      transition: all 0.3s ease; font-family: 'Noto Sans KR', sans-serif;
+    }
+    .contact-tab.active { background: var(--accent-color); color: #0b0c0e; border-color: var(--accent-color); }
+    .contact-tab:hover:not(.active) { border-color: var(--accent-color); color: var(--accent-color); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-sub); text-transform: uppercase; }
+    .form-group label .required { color: var(--accent-color); margin-left: 4px; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px 16px;
+      color: var(--text-main); font-size: 0.95rem; font-family: 'Noto Sans KR', sans-serif; transition: border-color 0.3s ease;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(160, 165, 176, 0.6); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .budget-range { display: flex; align-items: center; gap: 12px; }
+    .budget-range input { flex: 1; min-width: 0; }
+    .budget-range span { color: var(--text-sub); }
+
+    .category-fields { display: none; flex-direction: column; gap: 22px; }
+    .category-fields.active { display: flex; }
+
+    .consent-box {
+      display: flex; align-items: flex-start; gap: 12px; padding: 20px; background: var(--card-bg);
+      border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; color: var(--text-sub);
+      line-height: 1.7; cursor: pointer;
+    }
+    .consent-box input[type="checkbox"] { margin-top: 4px; width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--accent-color); }
+    .consent-box strong { color: var(--text-main); }
+
+    .submit-btn {
+      align-self: center; padding: 17px 70px; border-radius: 30px; background: var(--accent-color); color: #0b0c0e;
+      font-weight: 700; letter-spacing: 2px; font-size: 0.95rem; border: none; cursor: pointer;
+      transition: all 0.3s ease; margin-top: 10px; font-family: 'Noto Sans KR', sans-serif;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(229, 193, 88, 0.3); }
+
+    .submit-success-overlay {
+      position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center;
+      background: rgba(11, 12, 14, 0.9); backdrop-filter: blur(8px); padding: 20px;
+    }
+    .submit-success-overlay.active { display: flex; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .submit-success-box { background: var(--card-bg); border: 1px solid var(--accent-color); border-radius: 16px; padding: 55px 60px; text-align: center; max-width: 400px; }
+    .submit-success-box i { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; }
+    .submit-success-box p { font-size: 1.05rem; margin-bottom: 28px; line-height: 1.7; color: var(--text-main); }
+    .submit-success-box button {
+      padding: 12px 45px; border-radius: 24px; background: var(--accent-color); border: none; color: #0b0c0e;
+      font-weight: 700; cursor: pointer; letter-spacing: 1px; font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    /* Base Modal Layout */
+    .album-modal-overlay { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; background: rgba(11, 12, 14, 0.88); backdrop-filter: blur(14px); padding: 20px; }
+    .album-modal-overlay.active { display: flex; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+
+    .album-modal-box {
+      position: relative; width: 100%; max-width: 1050px; max-height: 90vh; overflow-y: auto; border-radius: 16px; padding: 45px;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      background-size: 250% 250% !important;
+      animation: modalGradientFlow 15s ease 1 forwards !important;
+    }
+    @keyframes modalGradientFlow {
+      from { background-position: 0% 50%; }
+      to   { background-position: 100% 50%; }
+    }
+    .modal-close-btn { position: absolute; top: 25px; right: 28px; font-size: 1.6rem; color: var(--text-sub); cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; z-index: 10; }
+    .modal-close-btn:hover { color: var(--accent-color); transform: rotate(90deg); }
+    .modal-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 45px; align-items: flex-start; position: relative; z-index: 1; }
+
+    /* 모래성 전용: 바람에 옆으로 휩쓸려 흩날리는 모래 알갱이 1회성 연출(15초 후 정지) */
+    .sand-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; border-radius: inherit; }
+    .sand-grain {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fffdf5, #d9a441 65%, #7a5220);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      animation-name: sandBlow; animation-timing-function: ease-in-out; animation-fill-mode: forwards; animation-iteration-count: 1;
+    }
+    @keyframes sandBlow {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+      12%  { opacity: 1; }
+      45%  { transform: translate(var(--dxMid, 90px), var(--dyMid, -6px)) rotate(var(--rotMid, 30deg)); }
+      75%  { opacity: 0.85; transform: translate(var(--dxLate, 200px), var(--dyLate, 4px)) rotate(var(--rotLate, 70deg)); }
+      100% { opacity: 0; transform: translate(var(--dxEnd, 280px), var(--dyEnd, -3px)) rotate(var(--rotEnd, 110deg)); }
+    }
+
+    /* 너의 꽃이 되어줄게 전용: 벚꽃잎이 흩날리며 떨어지는 1회성 연출(15초 후 정지) */
+    .petal-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; border-radius: inherit; }
+    .petal {
+      position: absolute; border-radius: 60% 40% 60% 40% / 60% 60% 40% 40%;
+      background: radial-gradient(circle at 30% 30%, #ffd9e0, #e8547a 55%, #a8123f 100%);
+      box-shadow: 0 0 2px rgba(120, 10, 40, 0.3);
+      opacity: 0;
+      animation-name: petalFall; animation-timing-function: ease-in-out; animation-fill-mode: forwards; animation-iteration-count: 1;
+    }
+    @keyframes petalFall {
+      0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+      10%  { opacity: 1; }
+      35%  { transform: translate(var(--swayA, 40px), var(--fallA, 140px)) rotate(var(--rotA, 90deg)); }
+      65%  { transform: translate(var(--swayB, -30px), var(--fallB, 300px)) rotate(var(--rotB, 220deg)); }
+      88%  { opacity: 0.85; }
+      100% { opacity: 0; transform: translate(var(--swayC, 20px), var(--fallC, 460px)) rotate(var(--rotC, 380deg)); }
+    }
+
+    .modal-left-col { display: flex; flex-direction: column; align-items: center; }
+    .modal-cover-wrap { width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; margin-bottom: 25px; }
+    .modal-cover-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .streaming-section-title { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; align-self: flex-start; }
+    .streaming-btn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
+    .streaming-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; transition: all 0.3s ease; }
+    .modal-right-col { display: flex; flex-direction: column; }
+    .modal-album-title-text { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
+    .modal-album-meta-text { font-size: 0.88rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px; padding-bottom: 15px; }
+    .magazine-section-label { font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .magazine-story-p { font-size: 0.95rem; font-weight: 300; line-height: 1.9; margin-bottom: 25px; white-space: pre-line; word-break: keep-all; padding: 20px; border-radius: 10px; }
+    .magazine-credits-list { display: flex; flex-direction: column; gap: 6px; padding: 16px 20px; border-radius: 8px; margin-bottom: 25px; font-size: 0.88rem; }
+    .tracklist-box { display: flex; flex-direction: column; gap: 8px; }
+    .track-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 8px; }
+    .track-title-wrap { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 500; }
+    .track-play-btn { cursor: pointer; transition: transform 0.15s ease; }
+    .track-play-btn:hover { transform: scale(1.15); }
+    .magazine-catchphrase { line-height: 1.65; letter-spacing: 0.2px; word-break: keep-all; text-align: center; }
+
+    /* ========================================================================== */
+    /* 5가지 앨범별 고유 모달 테마 디자인 (Album Custom Themes) */
+    /* ========================================================================== */
+
+    /* [Theme 1: May Day - Deep Ocean Signal] */
+    .theme-mayday {
+      background-image: linear-gradient(120deg, #030507, #0a1420, #16405f, #071726, #0a1c33) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(14, 165, 233, 0.15);
+    }
+    .theme-mayday .magazine-catchphrase {
+      font-family: 'Noto Serif KR', serif; font-style: italic; font-size: 1.05rem; padding: 14px 20px; border-radius: 8px; color: #e0f2fe;
+      background: linear-gradient(135deg, rgba(12, 35, 64, 0.8) 0%, rgba(9, 19, 31, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      animation: sosPulse 3.5s infinite alternate ease-in-out; margin-bottom: 18px;
+    }
+    @keyframes sosPulse {
+      0% { border-color: rgba(56, 189, 248, 0.2); box-shadow: inset 0 0 10px rgba(14, 165, 233, 0.05); }
+      100% { border-color: rgba(125, 211, 252, 0.6); box-shadow: inset 0 0 22px rgba(56, 189, 248, 0.25), 0 0 12px rgba(56, 189, 248, 0.2); }
+    }
+    .theme-mayday .modal-album-title-text { font-family: 'Cinzel', serif; color: #f0f9ff; }
+    .theme-mayday .modal-album-meta-text { color: #38bdf8; border-bottom: 1px solid rgba(56, 189, 248, 0.25); }
+    .theme-mayday .magazine-section-label { color: #38bdf8; }
+    .theme-mayday .magazine-story-p { background: rgba(12, 35, 64, 0.4); border: 1px solid rgba(56, 189, 248, 0.1); color: #e2e8f0; }
+    .theme-mayday .magazine-credits-list { background: rgba(12, 35, 64, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8; }
+    .theme-mayday .magazine-credits-list strong { color: #f0f9ff; }
+    .theme-mayday .track-item { background: rgba(12, 35, 64, 0.3); border: 1px solid rgba(56, 189, 248, 0.1); }
+    .theme-mayday .track-title-wrap i { color: #38bdf8; }
+    .theme-mayday .streaming-section-title { color: #38bdf8; }
+    .theme-mayday .streaming-btn { background: rgba(12, 35, 64, 0.4); border: 1px solid rgba(56, 189, 248, 0.2); color: #bae6fd; }
+    .theme-mayday .streaming-btn:hover { background: #38bdf8; color: #09131f; }
+
+    /* [Theme 2: 달빛호수 - Serene Moonlight] */
+    .theme-moonlight {
+      background-image: linear-gradient(120deg, #020203, #131318, #c6c6ce, #050506, #1a1a20) !important;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 255, 255, 0.08);
+    }
+    .theme-moonlight .magazine-catchphrase {
+      font-family: 'Gowun Batang', serif; font-size: 1.08rem; padding: 16px 22px; border-radius: 12px; color: #f2f2f5;
+      background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px);
+      border-left: 3px solid #d4d4d8; border-top: 1px solid rgba(255, 255, 255, 0.14); border-right: 1px solid rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 18px;
+    }
+    .theme-moonlight .modal-album-title-text { font-family: 'Gowun Batang', serif; color: #fafafa; }
+    .theme-moonlight .modal-album-meta-text { color: #c8c8ce; border-bottom: 1px solid rgba(255, 255, 255, 0.18); }
+    .theme-moonlight .magazine-section-label { color: #c8c8ce; }
+    .theme-moonlight .magazine-story-p { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: #e4e4e8; }
+    .theme-moonlight .magazine-credits-list { background: rgba(18, 18, 22, 0.8); border-left: 3px solid #c8c8ce; color: #9c9ca4; }
+    .theme-moonlight .magazine-credits-list strong { color: #f2f2f5; }
+    .theme-moonlight .track-item { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .theme-moonlight .track-title-wrap i { color: #d4d4d8; }
+    .theme-moonlight .streaming-section-title { color: #d4d4d8; }
+    .theme-moonlight .streaming-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.18); color: #e4e4e8; }
+    .theme-moonlight .streaming-btn:hover { background: #e4e4e8; color: #0a0a0c; }
+
+    /* [Theme 3: 모래성 - Warm Sand Bronze] */
+    .theme-sandcastle {
+      background-image: linear-gradient(120deg, #e8dcc3, #d9c093, #c2a06a, #ecdfc4, #cfb17e) !important;
+      border: 1px solid rgba(120, 90, 50, 0.35);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), 0 0 35px rgba(184, 146, 63, 0.15);
+    }
+    .theme-sandcastle .modal-close-btn { color: #6b4a24; }
+    .theme-sandcastle .magazine-catchphrase {
+      font-family: 'Noto Serif KR', serif; font-size: 1.05rem; padding: 18px 22px; border-radius: 12px; position: relative;
+      background: rgba(255, 255, 255, 0.48); border: 1px solid rgba(120, 90, 50, 0.3); color: #4a3418; margin-bottom: 18px;
+    }
+    .theme-sandcastle .modal-album-title-text { font-family: 'Noto Serif KR', serif; color: #3d2b14; }
+    .theme-sandcastle .modal-album-meta-text { color: #8a5a20; border-bottom: 1px solid rgba(120, 90, 50, 0.3); }
+    .theme-sandcastle .magazine-section-label { color: #8a5a20; }
+    .theme-sandcastle .magazine-story-p { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(120, 90, 50, 0.2); color: #2e1e0c; font-weight: 500; }
+    .theme-sandcastle .magazine-credits-list { background: rgba(255, 255, 255, 0.5); border-left: 3px solid #8a5a20; color: #6b4a24; }
+    .theme-sandcastle .magazine-credits-list strong { color: #3d2b14; }
+    .theme-sandcastle .track-item { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(120, 90, 50, 0.2); }
+    .theme-sandcastle .track-title-wrap i { color: #8a5a20; }
+    .theme-sandcastle .track-title-wrap { color: #4a3418; }
+    .theme-sandcastle .track-time { color: #6b4a24; }
+    .theme-sandcastle .streaming-section-title { color: #8a5a20; }
+    .theme-sandcastle .streaming-btn { background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(120, 90, 50, 0.35); color: #4a3418; }
+    .theme-sandcastle .streaming-btn:hover { background: #8a5a20; color: #fdf6e3; }
+
+    /* [Theme 4: 너의 꽃이 되어줄게 - Blooming Rose Gold] */
+    .theme-flower {
+      background-image: linear-gradient(120deg, #ffe4ec, #ffc9dd, #ffb0cf, #fff0f5, #ffd6e8) !important;
+      border: 1px solid rgba(219, 112, 147, 0.35);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15), 0 0 35px rgba(219, 112, 147, 0.2);
+    }
+    .theme-flower .modal-close-btn { color: #8a3355; }
+    .theme-flower .magazine-catchphrase {
+      font-family: 'Hi Melody', cursive; font-size: 1.3rem; padding: 16px 22px; border-radius: 20px; color: #6b1d38;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(219, 112, 147, 0.35); text-align: center; margin-bottom: 18px;
+    }
+    .theme-flower .modal-album-title-text { font-family: 'Hi Melody', cursive; font-size: 2.6rem; color: #5c1a30; }
+    .theme-flower .modal-album-meta-text { color: #b8477a; border-bottom: 1px solid rgba(219, 112, 147, 0.35); }
+    .theme-flower .magazine-section-label { color: #b8477a; }
+    .theme-flower .magazine-story-p { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(219, 112, 147, 0.25); color: #6b1d38; font-weight: 500; }
+    .theme-flower .magazine-credits-list { background: rgba(255, 255, 255, 0.5); border-left: 3px solid #b8477a; color: #8a3355; }
+    .theme-flower .magazine-credits-list strong { color: #5c1a30; }
+    .theme-flower .track-item { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(219, 112, 147, 0.25); }
+    .theme-flower .track-title-wrap i { color: #b8477a; }
+    .theme-flower .track-title-wrap { color: #6b1d38; }
+    .theme-flower .track-time { color: #8a3355; }
+    .theme-flower .streaming-section-title { color: #b8477a; }
+    .theme-flower .streaming-btn { background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(219, 112, 147, 0.35); color: #6b1d38; }
+    .theme-flower .streaming-btn:hover { background: #b8477a; color: #fff0f5; }
+
+    /* [Theme 5: 사랑을 말하고... - Classic Imperial Gold] */
+    .theme-love {
+      background-image: linear-gradient(120deg, #eef5e4, #d9e8c4, #e8dff0, #f5f3e0, #cfe0c0) !important;
+      border: 2px double rgba(140, 160, 110, 0.5);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15), 0 0 40px rgba(150, 170, 120, 0.25);
+    }
+    .theme-love .modal-close-btn { color: #4a5a3a; }
+    .theme-love .magazine-catchphrase {
+      font-family: 'Cinzel', 'Noto Serif KR', serif; font-size: 1.05rem; padding: 18px 24px; border-radius: 6px; color: #3a4a2a;
+      background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(140, 160, 110, 0.35); text-align: center; letter-spacing: 1px; margin-bottom: 18px;
+    }
+    .theme-love .modal-album-title-text { font-family: 'Cinzel', serif; color: #2f3d22; letter-spacing: 2px; }
+    .theme-love .modal-album-meta-text { color: #6b7a4a; border-bottom: 1px solid rgba(140, 160, 110, 0.35); }
+    .theme-love .magazine-section-label { color: #6b7a4a; }
+    .theme-love .magazine-story-p { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(140, 160, 110, 0.2); color: #3a4a2a; font-weight: 500; }
+    .theme-love .magazine-credits-list { background: rgba(255, 255, 255, 0.5); border-left: 3px solid #6b7a4a; color: #55643f; }
+    .theme-love .magazine-credits-list strong { color: #2f3d22; }
+    .theme-love .track-item { background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(140, 160, 110, 0.2); }
+    .theme-love .track-title-wrap i { color: #6b7a4a; }
+    .theme-love .track-title-wrap { color: #3a4a2a; }
+    .theme-love .track-time { color: #55643f; }
+    .theme-love .streaming-section-title { color: #6b7a4a; }
+    .theme-love .streaming-btn { background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(140, 160, 110, 0.35); color: #3a4a2a; }
+    .theme-love .streaming-btn:hover { background: #6b7a4a; color: #f5f3e0; }
+
+    /* Responsive Design */
+    @media (max-width: 992px) { .story-container { grid-template-columns: 1fr; gap: 35px; } .modal-grid { grid-template-columns: 1fr; gap: 30px; } .hero-brand-name { font-size: 2.8rem; letter-spacing: 6px; } }
+    @media (max-width: 768px) { header { padding: 15px 5%; } .album-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } .form-row { grid-template-columns: 1fr; } .contact-tab { padding: 12px 20px; font-size: 0.85rem; } }
+    @media (max-width: 480px) { .album-grid { grid-template-columns: 1fr; } .streaming-btn-grid { grid-template-columns: 1fr; } .submit-success-box { padding: 40px 30px; } }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-logo" onclick="switchPage('home')">
+      <i class="fa-solid fa-compact-disc"></i>
+      <span>TIMESTEALER</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a onclick="switchPage('home')" id="nav-home" class="active">HOME</a></li>
+        <li><a onclick="switchPage('about')" id="nav-about">ABOUT</a></li>
+        <li><a onclick="switchPage('artists')" id="nav-artists">ARTISTS</a></li>
+        <li><a onclick="switchPage('music')" id="nav-music">MUSIC & MEDIA</a></li>
+        <li><a onclick="switchPage('contact')" id="nav-contact">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 1. HOME SECTION (복원 완료된 메인 슬로건) -->
+  <section id="home" class="page-section active">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="홈페이지 메인.mp4" type="video/mp4">
+      사용 중인 브라우저는 비디오 태그를 지원하지 않습니다.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-slogan-box">
+      <div class="hero-brand-name">TIME STEALER</div>
+      <div class="hero-slogan-main">Fleeting moments, everlasting memories.</div>
+      <div class="hero-slogan-sub">사라지는 순간을, 영원한 기억으로</div>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT SECTION (완전한 스토리 전문 유지) -->
+  <section id="about" class="page-section">
+    <div class="story-container">
+      <div class="story-image-box">
+        <img src="대표자 사진.jpg" alt="권혁규 대표">
+      </div>
+      <div class="story-text-box">
+        <h2 class="story-title">OUR STORY</h2>
+        <div class="story-subtitle">Fleeting moments, everlasting memories.</div>
+        <div class="story-body">
+          <p>
+            우리는 누구에게나<br>
+            잊고 싶지 않은 순간이 있다고 믿습니다.
+          </p>
+          <p>
+            한 곡의 음악, 한 번의 공연, 하나의 콘텐츠가<br>
+            누군가의 삶 속에서 특별한 기억으로 남을 수 있습니다.
+          </p>
+          <p>
+            타임스틸러 엔터테인먼트는<br>
+            그 순간의 가치를 발견하고, 음악과 콘텐츠를 통해<br>
+            사람들의 마음에 오래 남는 작품을 만들어갑니다.
+          </p>
+          <p>
+            창작자의 개성과 감성을 존중하며,<br>
+            새로운 기술과 창의적인 시도를 바탕으로<br>
+            시대가 필요로 하는 새로운 엔터테인먼트 문화를 만들어가겠습니다.
+          </p>
+          <p>
+            단순히 소비되고 잊히는 콘텐츠가 아닌,<br>
+            시간이 지나도 다시 찾고 싶은 콘텐츠.<br>
+            누군가의 삶에 의미 있는 순간으로 남는 콘텐츠.
+          </p>
+          <p>
+            그 가치를 만들어가는 것이<br>
+            타임스틸러 엔터테인먼트가 지향하는 길입니다.
+          </p>
+        </div>
+        <div class="story-signature">
+          <span class="ceo-name">권혁규</span>
+          <span class="ceo-title">타임스틸러 엔터테인먼트 대표</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.5. ARTISTS SECTION -->
+  <section id="artists" class="page-section">
+    <div class="artists-container">
+      <div class="section-header-box">
+        <h2 class="story-title" style="text-align: center;">ARTISTS</h2>
+        <div class="story-subtitle" style="text-align: center;">TIMESTEALER Roster</div>
+      </div>
+
+      <div class="artist-grid">
+        <div class="artist-card" onclick="openArtistModal(1)">
+          <div class="artist-photo-box">
+            <img src="백유진 1.png" alt="백유진">
+          </div>
+          <span class="artist-name">백유진</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 아티스트 포트폴리오 팝업 -->
+  <div id="artistModal" class="artist-modal-overlay" onclick="closeArtistModalOnOuterClick(event)">
+    <div class="artist-modal-box">
+      <i class="fa-solid fa-xmark modal-close-btn" onclick="closeArtistModal()"></i>
+      <div class="artist-modal-photo">
+        <img id="aModalPhoto" src="" alt="Artist">
+      </div>
+      <h2 class="artist-modal-name" id="aModalName"></h2>
+    </div>
+  </div>
+
+  <!-- 3. MUSIC & MEDIA SECTION -->
+  <section id="music" class="page-section">
+    <div class="music-container">
+      <div class="section-header-box">
+        <h2 class="artistic-title">MUSIC & MEDIA</h2>
+        <div class="artistic-subtitle" style="font-style: normal;">Sounds & Visuals of TIMESTEALER</div>
+      </div>
+
+      <div class="album-grid">
+        <!-- 01. May Day -->
+        <div class="album-card" onclick="openAlbumModal(1)">
+          <div class="album-cover-box">
+            <img src="01.jpg" alt="May Day">
+            <div class="album-overlay"><span class="album-btn">ALBUM INFO</span></div>
+          </div>
+          <div class="album-info">
+            <span class="album-type">DIGITAL SINGLE</span>
+            <h3 class="album-title">May Day</h3>
+            <span class="album-date">2026. 04. 09.</span>
+          </div>
+        </div>
+
+        <!-- 02. 달빛호수 -->
+        <div class="album-card" onclick="openAlbumModal(2)">
+          <div class="album-cover-box">
+            <img src="02.jpg" alt="달빛호수">
+            <div class="album-overlay"><span class="album-btn">ALBUM INFO</span></div>
+          </div>
+          <div class="album-info">
+            <span class="album-type">DIGITAL SINGLE</span>
+            <h3 class="album-title">달빛호수</h3>
+            <span class="album-date">2026. 04. 15.</span>
+          </div>
+        </div>
+
+        <!-- 03. 모래성 -->
+        <div class="album-card" onclick="openAlbumModal(3)">
+          <div class="album-cover-box">
+            <img src="03.jpg" alt="모래성">
+            <div class="album-overlay"><span class="album-btn">ALBUM INFO</span></div>
+          </div>
+          <div class="album-info">
+            <span class="album-type">DIGITAL SINGLE</span>
+            <h3 class="album-title">모래성</h3>
+            <span class="album-date">2026. 04. 15.</span>
+          </div>
+        </div>
+
+        <!-- 04. 너의 꽃이 되어줄게 -->
+        <div class="album-card" onclick="openAlbumModal(4)">
+          <div class="album-cover-box">
+            <img src="04.jpg" alt="너의 꽃이 되어줄게">
+            <div class="album-overlay"><span class="album-btn">ALBUM INFO</span></div>
+          </div>
+          <div class="album-info">
+            <span class="album-type">DIGITAL SINGLE</span>
+            <h3 class="album-title">너의 꽃이 되어줄게</h3>
+            <span class="album-date">2026. 04. 15.</span>
+          </div>
+        </div>
+
+        <!-- 05. 사랑을 말하고... -->
+        <div class="album-card" onclick="openAlbumModal(5)">
+          <div class="album-cover-box">
+            <img src="05.jpg" alt="사랑을 말하고...">
+            <div class="album-overlay"><span class="album-btn">ALBUM INFO</span></div>
+          </div>
+          <div class="album-info">
+            <span class="album-type">DIGITAL SINGLE</span>
+            <h3 class="album-title">사랑을 말하고...</h3>
+            <span class="album-date">2026. 04. 23.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONTACT PAGE SECTION -->
+  <section id="contact" class="page-section">
+    <div class="contact-container">
+      <div class="section-header-box">
+        <h2 class="artistic-title" style="font-size: 2.6rem;">CONTACT</h2>
+        <div class="artistic-subtitle" style="font-style: normal; font-family: 'Noto Serif KR', serif; font-weight: 400; letter-spacing: 1px;">TIMESTEALER와 함께할 순간을 문의해주세요</div>
+      </div>
+
+      <div class="contact-tabs">
+        <button type="button" class="contact-tab active" data-category="event" onclick="switchContactCategory('event')">행사문의</button>
+        <button type="button" class="contact-tab" data-category="music" onclick="switchContactCategory('music')">음원제작문의</button>
+        <button type="button" class="contact-tab" data-category="quote" onclick="switchContactCategory('quote')">견적문의</button>
+      </div>
+
+      <form class="contact-form" id="contactForm" onsubmit="return handleContactSubmit(event)">
+        <input type="hidden" id="contactCategory" name="문의유형" value="행사문의">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>이름<span class="required">*</span></label>
+            <input type="text" name="이름" required placeholder="성함을 입력해주세요">
+          </div>
+          <div class="form-group">
+            <label>회사 / 소속명</label>
+            <input type="text" name="회사_소속명" placeholder="선택 입력">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>연락처<span class="required">*</span></label>
+            <input type="tel" name="연락처" required placeholder="010-0000-0000">
+          </div>
+          <div class="form-group">
+            <label>이메일<span class="required">*</span></label>
+            <input type="email" name="이메일" required placeholder="example@email.com">
+          </div>
+        </div>
+
+        <!-- 행사문의 전용 필드 -->
+        <div class="category-fields active" id="fields-event">
+          <div class="form-row">
+            <div class="form-group">
+              <label>행사명</label>
+              <input type="text" name="행사명" placeholder="행사 / 이벤트 명칭">
+            </div>
+            <div class="form-group">
+              <label>행사 장소</label>
+              <input type="text" name="행사장소" placeholder="예: 서울 OO홀">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>희망 일정</label>
+              <input type="date" name="행사_희망일정">
+            </div>
+            <div class="form-group">
+              <label>예상 인원 / 연령 / 남녀비율</label>
+              <input type="text" name="행사_인원구성" placeholder="예: 200명, 20~30대, 여성 70%">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>예산 (단위: 만원 / 부가세 별도)</label>
+            <div class="budget-range">
+              <input type="number" name="행사_최소예산" placeholder="최소 예산">
+              <span>~</span>
+              <input type="number" name="행사_최대예산" placeholder="최대 예산">
+            </div>
+          </div>
+        </div>
+
+        <!-- 음원제작문의 전용 필드 -->
+        <div class="category-fields" id="fields-music">
+          <div class="form-row">
+            <div class="form-group">
+              <label>제작 유형</label>
+              <select name="음원_제작유형">
+                <option value="">선택해주세요</option>
+                <option>디지털 싱글</option>
+                <option>EP / 미니앨범</option>
+                <option>정규 앨범</option>
+                <option>OST / 배경음악</option>
+                <option>기타</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>희망 장르</label>
+              <input type="text" name="음원_희망장르" placeholder="예: 발라드, 시티팝, 팝 등">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>참고 아티스트 / 레퍼런스 곡</label>
+              <input type="text" name="음원_레퍼런스" placeholder="선택 입력">
+            </div>
+            <div class="form-group">
+              <label>희망 발매 일정</label>
+              <input type="date" name="음원_희망발매일정">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>예산 (단위: 만원 / 부가세 별도)</label>
+            <div class="budget-range">
+              <input type="number" name="음원_최소예산" placeholder="최소 예산">
+              <span>~</span>
+              <input type="number" name="음원_최대예산" placeholder="최대 예산">
+            </div>
+          </div>
+        </div>
+
+        <!-- 견적문의 전용 필드 -->
+        <div class="category-fields" id="fields-quote">
+          <div class="form-group">
+            <label>문의 항목</label>
+            <input type="text" name="견적_문의항목" placeholder="예: 저작권, 음원 유통, 광고 · 브랜드 음악 제작 등">
+          </div>
+          <div class="form-group">
+            <label>예산 (단위: 만원 / 부가세 별도)</label>
+            <div class="budget-range">
+              <input type="number" name="견적_최소예산" placeholder="최소 예산">
+              <span>~</span>
+              <input type="number" name="견적_최대예산" placeholder="최대 예산">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>기타 남기고 싶은 말씀</label>
+          <textarea name="기타_문의내용" placeholder="자유롭게 작성해주세요"></textarea>
+        </div>
+
+        <label class="consent-box">
+          <input type="checkbox" name="개인정보_동의" value="동의" required>
+          <span>
+            <strong>[필수] 개인정보 수집 및 이용에 동의합니다.</strong><br>
+            타임스틸러 엔터테인먼트는 문의 접수 및 답변을 위해 이름, 연락처, 이메일 등 개인정보를 수집하며,
+            문의 처리 목적 달성 후 관계 법령에 따른 보관 기간이 경과하면 지체 없이 파기합니다.
+            수집된 정보는 문의 응대 목적 외에는 사용되지 않습니다.
+          </span>
+        </label>
+
+        <button type="submit" class="submit-btn" id="contactSubmitBtn">문의 제출하기</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 문의 제출 완료 안내 -->
+  <div class="submit-success-overlay" id="submitSuccessOverlay">
+    <div class="submit-success-box">
+      <i class="fa-solid fa-circle-check"></i>
+      <p>정상적으로 접수되었습니다.<br>빠른 시일 내에 답변드리겠습니다.</p>
+      <button type="button" onclick="closeSubmitSuccess()">확인</button>
+    </div>
+  </div>
+
+  <!-- ALBUM MODAL CONTAINER -->
+  <!-- 트랙 재생용 숨김 유튜브 오디오 플레이어 -->
+  <div id="yt-audio-player" style="position:absolute; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none;"></div>
+
+  <div id="albumModal" class="album-modal-overlay" onclick="closeModalOnOuterClick(event)">
+    <div class="album-modal-box" id="mBox">
+      <i class="fa-solid fa-xmark modal-close-btn" onclick="closeAlbumModal()"></i>
+      <div class="sand-particles" id="sandParticles"></div>
+      <div class="petal-particles" id="petalParticles"></div>
+
+      <div class="modal-grid">
+        <div class="modal-left-col">
+          <div class="modal-cover-wrap">
+            <img id="mCoverImg" src="" alt="Album Cover">
+          </div>
+          <span class="magazine-section-label" style="align-self: flex-start;">Track List</span>
+          <div class="tracklist-box" id="mTracklist" style="width: 100%;"></div>
+
+          <span class="streaming-section-title" style="margin-top: 25px;">Streaming Now</span>
+          <div class="streaming-btn-grid" id="mStreamingBtns"></div>
+        </div>
+
+        <div class="modal-right-col">
+          <div class="magazine-catchphrase" id="mCatchphrase"></div>
+          <h2 class="modal-album-title-text" id="mTitle"></h2>
+          <div class="modal-album-meta-text" id="mMeta"></div>
+
+          <span class="magazine-section-label">Concept Story</span>
+          <p class="magazine-story-p" id="mStory"></p>
+
+          <span class="magazine-section-label">Credits</span>
+          <div class="magazine-credits-list" id="mCredits"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript: 5개 앨범 고유 테마 및 스크립트 데이터 -->
+  <script>
+    const albumData = {
+      1: {
+        themeClass: "theme-mayday",
+        cover: "01.jpg",
+        type: "DIGITAL SINGLE",
+        title: "May Day",
+        date: "2026. 04. 09.",
+        catchphrase: "아무도 닿지 않는 곳에서 보내는 가장 조용한 구조신호 'Mayday'",
+        story: `끝없이 가라앉는 감정 속에서 방향을 잃은 채 흔들리는 한 존재의 내면을 그려낸 이 곡은 말조차 꺼낼 수 없는 침묵과 그 안에서 사라지지 않으려는 마지막 의지를 담아낸다.\n\n붙잡으려 할수록 더 멀어지는 온기, 그리고 점점 자신조차 지켜내지 못하는 상태속에서 단 한번이라도 이름을 불러주길 바라는 절박한 마음이 서서히 고조된다.\n\n절제된 사운드와 깊이 있는 감정선 위에 쌓인 보컬은 마치 물속으로 가라앉는 듯한 몰입감을 선사하며 끝내 사라지지 않으려는 미약하지만 분명한 생의 의지를 드러낸다.\n\n'Mayday'는 무너짐의 끝에서 비로소 들려오는 가장 진솔한 외침이자 어둠 속에서도 끝까지 남아 있는 단 하나의 감정을 노래한다.`,
+        credits: [
+          { role: "Executive Producer / Produced by", name: "권혁규" },
+          { role: "Lyrics by", name: "권혁규" },
+          { role: "Composed by", name: "권혁규" },
+          { role: "Arranged by", name: "권혁규" },
+          { role: "Vocal Director by", name: "권혁규" },
+          { role: "Vocal by", name: "심지연" },
+          { role: "Chorus by", name: "권혁규, 심지연" },
+          { role: "MIDI & Chorus Editing by", name: "김라영" },
+          { role: "Mixed & Mastered by", name: "타임스틸러" }
+        ],
+        tracks: [{ title: "May Day", time: "03:22", isTitle: true }],
+        streamingLinks: {
+          melon: "https://kko.to/iyUovqk6Ph",
+          genie: "https://www.genie.co.kr/1Z0FA2",
+          bugs: "https://music.bugs.co.kr/track/33897266",
+          spotify: "https://open.spotify.com/track/3eleB9k0VOcptyLgEifEQD?si=aa7a8f4722714c06",
+          apple: "https://music.apple.com/kr/song/mayday/1891002025",
+          youtube: "https://music.youtube.com/watch?v=zRS8y1g2y1I&si=m44Ej4WQar83Syza"
+        }
+      },
+      2: {
+        themeClass: "theme-moonlight",
+        cover: "02.jpg",
+        type: "DIGITAL SINGLE",
+        title: "달빛호수",
+        date: "2026. 04. 15.",
+        catchphrase: "잔잔한 밤, 말보다 감정이 먼저 닿는 조용한 사랑을 노래하는 레트로 감성 시티팝",
+        story: `잔잔한 호수 위에 내려앉은 달빛처럼 조용히 스며드는 감정의 순간을 담아낸 시티팝 트랙 달빛호수. 바람마저 숨을 죽인 밤, 물결 위로 흩어지는 별빛과 함께 전해지는 두 사람의 온기.\n\n말로 다 표현할 수 없는 눈빛과 감정들이 고요한 밤 속에 머물며 마치 시간이 멈춘 듯한 순간을 만들어낸다. 레트로한 감성과 부드러운 리듬 위에 얹힌 섬세한 보컬은 오래 남는 기억처럼 깊은 여운을 전한다.\n\n모든것이 지나가도 마음속에 남아있는 단 하나의 밤, 그 조용하고도 빛나는 순간을 노래한다. 달빛호수는 말보다 감정이 먼저 닿는 가장 조용한 방식의 사랑을 그린 시티팝이다.`,
+        credits: [
+          { role: "Lyrics by", name: "권혁규" },
+          { role: "Composed by", name: "권혁규" },
+          { role: "Arranged by", name: "권혁규" },
+          { role: "Vocal Director by", name: "권혁규" },
+          { role: "Vocal & Chorus by", name: "신윤호" },
+          { role: "MIDI & Chorus Editing by", name: "김라영" },
+          { role: "Mixed by", name: "타임스틸러" },
+          { role: "Mastered by", name: "타임스틸러" },
+          { role: "Produced by", name: "권혁규" }
+        ],
+        tracks: [{ title: "달빛호수", time: "03:05", isTitle: true }],
+        streamingLinks: {
+          melon: "https://kko.to/4FG_WzIpQx",
+          genie: "https://www.genie.co.kr/DHRCN0",
+          bugs: "https://music.bugs.co.kr/track/33903168",
+          spotify: "https://open.spotify.com/track/4tsGeMwTx5VeToKdLx40N2?si=82f88bc579584000",
+          apple: "https://music.apple.com/kr/song/%EB%8B%AC%EB%B9%9B%ED%98%B8%EC%88%98/1892270516",
+          youtube: "https://music.youtube.com/watch?v=NzKO14SD-qM&si=7JkdPt-WQezz_mvS"
+        }
+      },
+      3: {
+        themeClass: "theme-sandcastle",
+        cover: "03.jpg",
+        type: "DIGITAL SINGLE",
+        title: "모래성",
+        date: "2026. 04. 15.",
+        catchphrase: "지켜내고 싶었던 모든 것이 사라진 자리, 씁쓸하게 남아있는 감정의 잔향을 전하는 곡.",
+        story: `무너지지 않을 것이라 믿었던 마음이 가장 쉽게 무너지는 순간을 담아낸 곡 '모래성'. 단단하게 쌓아 올린 감정의 성은 한 번의 침묵과 시선 앞에서 허무하게 붕괴되고, 그 안에서 끝내 자신조차 지켜내지 못하는 내면의 균열이 드러나는 것을 표현하기위해 위태로운 사운드로 연출했다.\n\n이 곡은 사랑이 사라지는 이야기가 아니라 사랑 속에서 서서히 무너져가는 한 사람의 감정을 그린다. 붙잡으려 할수록 흩어지고, 지우려 할수록 더 선명해지는 잔향 속에서 결국 남는 것은 한 줌의 모래처럼 흩어지는 마음뿐이다. 장맛비처럼 쏟아지는 감정과 그 속에서도 반복해서 되돌아가는 마음을 섬세하게 그려내며 현실과 감정 사이에서 무너지는 인간의 나약함을 깊이 있게 담아낸다.\n\n'모래성'은 지켜내고 싶었던 모든 것이 결국 흩어지는 순간, 그 허무와 집착, 그리고 끝내 놓지 못하는 마음을 노래한 곡이다.`,
+        credits: [
+          { role: "Lyrics by", name: "권혁규, 헬리(Helly)" },
+          { role: "Composed by", name: "권혁규" },
+          { role: "Arranged by", name: "권혁규" },
+          { role: "Vocal Director by", name: "권혁규" },
+          { role: "Vocal & Chorus by", name: "헬리(Helly)" },
+          { role: "MIDI & Chorus Editing by", name: "김라영" },
+          { role: "Mixed by", name: "타임스틸러" },
+          { role: "Mastered by", name: "타임스틸러" },
+          { role: "Produced by", name: "권혁규" }
+        ],
+        tracks: [{ title: "모래성", time: "02:33", isTitle: true }],
+        streamingLinks: {
+          melon: "https://kko.to/_BGBhdYyz8",
+          genie: "https://www.genie.co.kr/PNPNO6",
+          bugs: "https://music.bugs.co.kr/track/33903004",
+          spotify: "https://open.spotify.com/track/2i5qCIsZThVdmkBOx7rtXN?si=3cf463f56c4544ab",
+          apple: "https://music.apple.com/kr/song/sand-castle/1892254984",
+          youtube: "https://music.youtube.com/watch?v=Z4W6qqW7K7s&si=ecckNlBgiXBaq7Yt"
+        }
+      },
+      4: {
+        themeClass: "theme-flower",
+        cover: "04.jpg",
+        type: "DIGITAL SINGLE",
+        title: "너의 꽃이 되어줄게",
+        date: "2026. 04. 15.",
+        catchphrase: "햇살처럼 스며드는 사랑의 감정을 담아낸 따뜻한 발라드",
+        story: `소소한 일상 속에서 피어나는 설렘과 말없이 곁을 지켜주고 싶은 마음을 섬세하게 그려낸 이 곡은 누군가의 하루에 조용히 머물고 싶은 진심을 담고 있다.\n\n밝은 미소 뒤에 숨겨진 따스함 그리고 상처받지 않게 조심스럽게 다가가는 마음이 '꽃'이라는 이미지로 표현되며, 부담스럽지 않지만 깊이있게 스며드는 사랑을 전한다.\n\n힘든 날에는 위로가 되고, 평범한 날에는 향기가 되어 곁에 머무는 존재. 이 곡은 결국, 화려하지 않아도 오래 남는 사랑의 형태를 이야기한다.\n\n'너의 꽃이 되어줄게'는 누군가의 곁에서 조용히 피어나, 가장 따뜻한 위로가 되어주는 마음을 노래한 곡이다.`,
+        credits: [
+          { role: "Lyrics by", name: "권혁규, 최도경" },
+          { role: "Composed by", name: "권혁규" },
+          { role: "Arranged by", name: "권혁규" },
+          { role: "Vocal Director by", name: "권혁규" },
+          { role: "Vocal by", name: "최도경" },
+          { role: "Chorus by", name: "신윤호" },
+          { role: "MIDI & Chorus Editing by", name: "김라영" },
+          { role: "Mixed by", name: "타임스틸러" },
+          { role: "Mastered by", name: "타임스틸러" },
+          { role: "Produced by", name: "권혁규" }
+        ],
+        tracks: [{ title: "너의 꽃이 되어줄게", time: "03:31", isTitle: true }],
+        streamingLinks: {
+          melon: "https://kko.to/MhEE_hd3O_",
+          genie: "https://www.genie.co.kr/HQZ1G8",
+          bugs: "https://music.bugs.co.kr/track/33903059",
+          spotify: "https://open.spotify.com/track/6K9Pk3O9CT7punbuVBS4gs?si=b4f46a163a8f47ee",
+          apple: "https://music.apple.com/kr/song/%EB%84%88%EC%9D%98-%EA%BD%83%EC%9D%B4-%EB%90%98%EC%96%B4%EC%A4%84%EA%B2%8C/1892254867",
+          youtube: "https://music.youtube.com/watch?v=I8NLajSKQR8&si=UvMzeGxtDpfiwuge"
+        }
+      },
+      5: {
+        themeClass: "theme-love",
+        cover: "05.jpg",
+        type: "DIGITAL SINGLE",
+        title: "사랑을 말하고...",
+        date: "2026. 04. 23.",
+        catchphrase: "사랑을 말하지 않아도, 그대를 안으면 흔들리던 내 하루는 다시 제자리를 찾고",
+        story: `누구에게나 숨이 멎을 듯 고단한 밤이 찾아옵니다. 이번 싱글 '사랑을 말하고...'는 그 어둠 속에서 유일한 빛이 되어준 존재에 대한 찬가입니다.\n\n상처를 묻지 않고 있는 그대로의 나를 안아주었던 그대에게 바치는 이 곡은, 클래식한 피아노 선율과 서정적인 스트링 사운드가 어우러져 깊은 울림을 선사합니다.\n\n시간이 흘러 사랑이 조금 닳더라도 결코 지워지지 않을 이름, 그대라는 존재가 주는 삶의 의미를 감각적인 가사와 선율로 만나보세요.`,
+        credits: [
+          { role: "Lyrics by", name: "권혁규" },
+          { role: "Composed by", name: "권혁규" },
+          { role: "Arranged by", name: "권혁규, 권희주" },
+          { role: "Vocal Director by", name: "권혁규" },
+          { role: "Vocal by", name: "이상혁" },
+          { role: "Chorus by", name: "이상혁" },
+          { role: "MIDI & Chorus Editing by", name: "권혁규" },
+          { role: "Mixed by", name: "타임스틸러" },
+          { role: "Mastered by", name: "타임스틸러" },
+          { role: "Produced by", name: "권혁규" },
+          { role: "Cover Design by", name: "YoAz" }
+        ],
+        tracks: [{ title: "사랑을 말하고...", time: "03:50", isTitle: true }],
+        streamingLinks: {
+          melon: "https://kko.to/Vqbxk28Nv4",
+          genie: "https://www.genie.co.kr/PKCUP4",
+          bugs: "https://music.bugs.co.kr/track/33912686",
+          spotify: "https://open.spotify.com/track/0AmhAMFfcKHDCwDQMyJe2r?si=65e2f8c0baef4935",
+          apple: "https://music.apple.com/kr/song/%EC%82%AC%EB%9E%91%EC%9D%84-%EB%A7%90%ED%95%98%EA%B3%A0/6762593244",
+          youtube: "https://music.youtube.com/watch?v=Lh5p7gX6O2o&si=-FY1GnQWsf5JQzav"
+        }
+      }
+    };
+
+    // 모래성 전용: 바람에 옆으로 휩쓸려 흩날리는 아주 작은 모래 알갱이 효과.
+    // 각 입자는 0~4초 사이에 시작해 8~11초간 옆으로 흘러가므로 전체가 15초 안에 끝나고,
+    // 반복 없이(iteration-count:1, forwards) 멈춘다.
+    function renderSandParticles(active) {
+      const container = document.getElementById('sandParticles');
+      if (!container) return;
+      container.innerHTML = '';
+      if (!active) return;
+      const count = 220;
+      for (let i = 0; i < count; i++) {
+        const grain = document.createElement('span');
+        grain.className = 'sand-grain';
+        const size = (Math.random() * 1.3 + 0.7).toFixed(1);
+        const left = (Math.random() * 90 - 5).toFixed(1);
+        const top = (Math.random() * 85 + 5).toFixed(1);
+        const delay = (Math.random() * 4).toFixed(2);
+        const duration = (Math.random() * 3 + 8).toFixed(2);
+
+        // 바람이 오른쪽으로 부는 방향으로 수평 이동, 약한 상하 요동으로 자연스러운 난기류 표현
+        const dxEnd = Math.random() * 240 + 180;
+        const dxMid = dxEnd * 0.42;
+        const dxLate = dxEnd * 0.75;
+        const dyMid = (Math.random() * 30 - 15).toFixed(1);
+        const dyLate = (Math.random() * 34 - 17).toFixed(1);
+        const dyEnd = (Math.random() * 26 - 13).toFixed(1);
+        const rotMid = (Math.random() * 30 + 15).toFixed(0);
+        const rotLate = (Math.random() * 35 + 50).toFixed(0);
+        const rotEnd = (Math.random() * 50 + 90).toFixed(0);
+
+        grain.style.width = grain.style.height = `${size}px`;
+        grain.style.left = `${left}%`;
+        grain.style.top = `${top}%`;
+        grain.style.animationDelay = `${delay}s`;
+        grain.style.animationDuration = `${duration}s`;
+        grain.style.setProperty('--dxMid', `${dxMid.toFixed(0)}px`);
+        grain.style.setProperty('--dxLate', `${dxLate.toFixed(0)}px`);
+        grain.style.setProperty('--dxEnd', `${dxEnd.toFixed(0)}px`);
+        grain.style.setProperty('--dyMid', `${dyMid}px`);
+        grain.style.setProperty('--dyLate', `${dyLate}px`);
+        grain.style.setProperty('--dyEnd', `${dyEnd}px`);
+        grain.style.setProperty('--rotMid', `${rotMid}deg`);
+        grain.style.setProperty('--rotLate', `${rotLate}deg`);
+        grain.style.setProperty('--rotEnd', `${rotEnd}deg`);
+        container.appendChild(grain);
+      }
+    }
+
+    // 너의 꽃이 되어줄게 전용: 벚꽃잎이 좌우로 흔들리며 떨어지는 1회성 효과.
+    // 각 꽃잎은 0~4초 사이에 시작해 8~11초간 떨어지므로 전체가 15초 안에 끝나고,
+    // 반복 없이(iteration-count:1, forwards) 멈춘다.
+    function renderPetalParticles(active) {
+      const container = document.getElementById('petalParticles');
+      if (!container) return;
+      container.innerHTML = '';
+      if (!active) return;
+      const count = 28;
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('span');
+        petal.className = 'petal';
+        const width = (Math.random() * 15 + 21).toFixed(1);
+        const height = (width * 0.6).toFixed(1);
+        const left = (Math.random() * 100).toFixed(1);
+        const top = (Math.random() * 85).toFixed(1);
+        const delay = (Math.random() * 4).toFixed(2);
+        const duration = (Math.random() * 3 + 8).toFixed(2);
+
+        const fallC = Math.random() * 220 + 340;
+        const fallA = fallC * 0.32;
+        const fallB = fallC * 0.66;
+        const swaySign = Math.random() < 0.5 ? -1 : 1;
+        const swayA = (swaySign * (Math.random() * 30 + 30)).toFixed(0);
+        const swayB = (-swaySign * (Math.random() * 30 + 30)).toFixed(0);
+        const swayC = (swaySign * (Math.random() * 25 + 15)).toFixed(0);
+        const rotA = (Math.random() * 60 + 60).toFixed(0);
+        const rotB = (Math.random() * 80 + 180).toFixed(0);
+        const rotC = (Math.random() * 100 + 320).toFixed(0);
+
+        petal.style.width = `${width}px`;
+        petal.style.height = `${height}px`;
+        petal.style.left = `${left}%`;
+        petal.style.top = `${top}%`;
+        petal.style.animationDelay = `${delay}s`;
+        petal.style.animationDuration = `${duration}s`;
+        petal.style.setProperty('--fallA', `${fallA.toFixed(0)}px`);
+        petal.style.setProperty('--fallB', `${fallB.toFixed(0)}px`);
+        petal.style.setProperty('--fallC', `${fallC.toFixed(0)}px`);
+        petal.style.setProperty('--swayA', `${swayA}px`);
+        petal.style.setProperty('--swayB', `${swayB}px`);
+        petal.style.setProperty('--swayC', `${swayC}px`);
+        petal.style.setProperty('--rotA', `${rotA}deg`);
+        petal.style.setProperty('--rotB', `${rotB}deg`);
+        petal.style.setProperty('--rotC', `${rotC}deg`);
+        container.appendChild(petal);
+      }
+    }
+
+    // ===== Track List 재생 (유튜브 오디오, 숨김 플레이어) =====
+    let ytPlayer = null;
+    let ytApiReady = false;
+    let currentPlayBtn = null;
+
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('yt-audio-player', {
+        height: '0',
+        width: '0',
+        playerVars: { autoplay: 0, controls: 0 },
+        events: {
+          onReady: () => { ytApiReady = true; },
+          onStateChange: onYtStateChange
+        }
+      });
+    }
+
+    function onYtStateChange(e) {
+      if (!currentPlayBtn) return;
+      if (e.data === YT.PlayerState.PLAYING) {
+        currentPlayBtn.classList.remove('fa-play');
+        currentPlayBtn.classList.add('fa-pause');
+      } else if (e.data === YT.PlayerState.PAUSED) {
+        currentPlayBtn.classList.remove('fa-pause');
+        currentPlayBtn.classList.add('fa-play');
+      } else if (e.data === YT.PlayerState.ENDED) {
+        currentPlayBtn.classList.remove('fa-pause');
+        currentPlayBtn.classList.add('fa-play');
+        currentPlayBtn = null;
+      }
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      const m = url.match(/[?&]v=([^&]+)/);
+      return m ? m[1] : null;
+    }
+
+    function togglePlayTrack(event, videoId, btn) {
+      event.stopPropagation();
+      if (!videoId || !ytApiReady || !ytPlayer) return;
+
+      if (currentPlayBtn === btn) {
+        const state = ytPlayer.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          ytPlayer.pauseVideo();
+        } else {
+          ytPlayer.playVideo();
+        }
+        return;
+      }
+
+      if (currentPlayBtn) {
+        currentPlayBtn.classList.remove('fa-pause');
+        currentPlayBtn.classList.add('fa-play');
+      }
+      currentPlayBtn = btn;
+      ytPlayer.loadVideoById(videoId);
+    }
+
+    function stopCurrentTrack() {
+      if (ytPlayer && ytApiReady && typeof ytPlayer.stopVideo === 'function') {
+        ytPlayer.stopVideo();
+      }
+      currentPlayBtn = null;
+    }
+
+    function openAlbumModal(id) {
+      const data = albumData[id];
+      if (!data) return;
+
+      stopCurrentTrack();
+
+      const modalBox = document.getElementById('mBox');
+      modalBox.className = "album-modal-box " + data.themeClass;
+      renderSandParticles(data.themeClass === 'theme-sandcastle');
+
+      document.getElementById('mCoverImg').src = data.cover;
+      document.getElementById('mCatchphrase').innerText = data.catchphrase;
+      document.getElementById('mTitle').innerText = data.title;
+      document.getElementById('mMeta').innerText = `${data.type}  |  ${data.date}`;
+      document.getElementById('mStory').innerText = data.story;
+
+      // 플랫폼별 아이콘/라벨 매핑. 실제로 확인된 링크만 버튼으로 렌더링(깨진 링크 노출 방지).
+      const PLATFORM_META = {
+        melon:   { icon: "fa-solid fa-music",       label: "Melon" },
+        genie:   { icon: "fa-solid fa-compact-disc", label: "Genie" },
+        bugs:    { icon: "fa-solid fa-headphones",   label: "Bugs" },
+        spotify: { icon: "fa-brands fa-spotify",     label: "Spotify" },
+        apple:   { icon: "fa-brands fa-apple",       label: "Apple Music" },
+        youtube: { icon: "fa-brands fa-youtube",     label: "YouTube" }
+      };
+      const links = data.streamingLinks;
+      document.getElementById('mStreamingBtns').innerHTML = Object.keys(PLATFORM_META)
+        .filter(key => links[key] && links[key] !== '#')
+        .map(key => {
+          const meta = PLATFORM_META[key];
+          return `<a href="${links[key]}" class="streaming-btn" target="_blank" rel="noopener"><i class="${meta.icon}"></i> ${meta.label}</a>`;
+        })
+        .join('');
+
+      const creditBox = document.getElementById('mCredits');
+      creditBox.innerHTML = '';
+      data.credits.forEach(item => {
+        const div = document.createElement('div');
+        div.innerHTML = `<strong>${item.role} :</strong> ${item.name}`;
+        creditBox.appendChild(div);
+      });
+
+      const trackContainer = document.getElementById('mTracklist');
+      trackContainer.innerHTML = '';
+      const trackVideoId = extractYouTubeId(data.streamingLinks.youtube);
+      data.tracks.forEach((track, index) => {
+        const item = document.createElement('div');
+        item.className = 'track-item';
+        item.innerHTML = `
+          <div class="track-title-wrap">
+            <i class="fa-solid fa-play track-play-btn" onclick="togglePlayTrack(event, '${trackVideoId}', this)"></i>
+            <span>${String(index + 1).padStart(2, '0')}. ${track.title} ${track.isTitle ? '<span style="opacity:0.8; font-size:0.75rem; margin-left:6px;">*TITLE</span>' : ''}</span>
+          </div>
+          <span class="track-time">${track.time}</span>
+        `;
+        trackContainer.appendChild(item);
+      });
+
+      document.getElementById('albumModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAlbumModal() {
+      document.getElementById('albumModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      stopCurrentTrack();
+    }
+
+    function closeModalOnOuterClick(e) {
+      if (e.target.id === 'albumModal') closeAlbumModal();
+    }
+
+    // ===== ARTISTS 포트폴리오 팝업 =====
+    const artistData = {
+      1: { name: '백유진', photo: '백유진 1.png' }
+    };
+
+    function openArtistModal(id) {
+      const data = artistData[id];
+      if (!data) return;
+      document.getElementById('aModalPhoto').src = data.photo;
+      document.getElementById('aModalName').innerText = data.name;
+      document.getElementById('artistModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeArtistModal() {
+      document.getElementById('artistModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function closeArtistModalOnOuterClick(e) {
+      if (e.target.id === 'artistModal') closeArtistModal();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeAlbumModal(); closeArtistModal(); }
+    });
+
+    // ===== CONTACT 폼: 카테고리 전환 및 제출 처리 =====
+    // TODO: formspree.io에서 발급받은 실제 폼 엔드포인트로 교체할 것 (예: https://formspree.io/f/xxxxxxxx)
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjybrony';
+
+    const CATEGORY_LABELS = { event: '행사문의', music: '음원제작문의', quote: '견적문의' };
+
+    function switchContactCategory(category) {
+      document.querySelectorAll('.contact-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.category === category);
+      });
+      document.querySelectorAll('.category-fields').forEach(field => {
+        field.classList.remove('active');
+      });
+      const target = document.getElementById('fields-' + category);
+      if (target) target.classList.add('active');
+      document.getElementById('contactCategory').value = CATEGORY_LABELS[category] || category;
+    }
+
+    async function handleContactSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const submitBtn = document.getElementById('contactSubmitBtn');
+
+      // 현재 선택되지 않은 카테고리의 숨겨진 입력 필드는 전송에서 제외(수신 이메일을 깔끔하게 유지)
+      const disabledInputs = [];
+      form.querySelectorAll('.category-fields:not(.active) input, .category-fields:not(.active) select').forEach(el => {
+        el.disabled = true;
+        disabledInputs.push(el);
+      });
+
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = '전송 중...';
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          document.getElementById('submitSuccessOverlay').classList.add('active');
+          form.reset();
+          switchContactCategory('event');
+        } else {
+          alert('문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        }
+      } catch (err) {
+        alert('네트워크 오류로 문의를 전송하지 못했습니다. 인터넷 연결을 확인해주세요.');
+      } finally {
+        disabledInputs.forEach(el => { el.disabled = false; });
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+
+      return false;
+    }
+
+    function closeSubmitSuccess() {
+      document.getElementById('submitSuccessOverlay').classList.remove('active');
+    }
+
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      const targetSection = document.getElementById(pageId) || document.getElementById('home');
+      targetSection.classList.add('active');
+      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+      const activeNav = document.getElementById('nav-' + pageId);
+      if (activeNav) activeNav.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+  <!-- Track List 재생버튼용 유튜브 오디오 재생 API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>
