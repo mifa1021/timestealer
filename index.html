@@ -35,6 +35,7 @@
 
     nav ul { display: flex; list-style: none; gap: 30px; }
     nav a { font-size: 0.9rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-sub); transition: color 0.3s ease; cursor: pointer; }
+    .nav-toggle-btn { display: none; background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; z-index: 200; padding: 4px 6px; }
     nav a.active, nav a:hover { color: var(--accent-color); }
 
     /* Page Sections */
@@ -443,7 +444,22 @@
 
     /* Responsive Design */
     @media (max-width: 992px) { .story-container { grid-template-columns: 1fr; gap: 35px; } .modal-grid { grid-template-columns: 1fr; gap: 30px; } .hero-brand-name { font-size: 2.8rem; letter-spacing: 6px; } }
-    @media (max-width: 768px) { header { padding: 15px 5%; } .album-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } .form-row { grid-template-columns: 1fr; } .contact-tab { padding: 12px 20px; font-size: 0.85rem; } }
+    @media (max-width: 768px) {
+      header { padding: 15px 5%; }
+      .album-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-tab { padding: 12px 20px; font-size: 0.85rem; }
+      .nav-toggle-btn { display: block; }
+      nav#mainNav {
+        position: fixed; inset: 0; width: 100%; height: 100vh; background: rgba(11, 12, 14, 0.98);
+        display: flex; align-items: center; justify-content: center;
+        transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 150;
+      }
+      nav#mainNav.open { transform: translateX(0); }
+      nav#mainNav ul { flex-direction: column; align-items: center; gap: 38px; }
+      nav#mainNav a { font-size: 1.4rem; letter-spacing: 2px; }
+    }
     @media (max-width: 480px) { .album-grid { grid-template-columns: 1fr; } .streaming-btn-grid { grid-template-columns: 1fr; } .submit-success-box { padding: 40px 30px; } }
   </style>
 </head>
@@ -455,15 +471,18 @@
       <i class="fa-solid fa-compact-disc"></i>
       <span>TIMESTEALER</span>
     </div>
-    <nav>
+    <nav id="mainNav">
       <ul>
-        <li><a onclick="switchPage('home')" id="nav-home" class="active">HOME</a></li>
-        <li><a onclick="switchPage('about')" id="nav-about">ABOUT</a></li>
-        <li><a onclick="switchPage('artists')" id="nav-artists">ARTISTS</a></li>
-        <li><a onclick="switchPage('music')" id="nav-music">MUSIC & MEDIA</a></li>
-        <li><a onclick="switchPage('contact')" id="nav-contact">CONTACT</a></li>
+        <li><a onclick="navigateTo('home')" id="nav-home" class="active">HOME</a></li>
+        <li><a onclick="navigateTo('about')" id="nav-about">ABOUT</a></li>
+        <li><a onclick="navigateTo('artists')" id="nav-artists">ARTISTS</a></li>
+        <li><a onclick="navigateTo('music')" id="nav-music">MUSIC & MEDIA</a></li>
+        <li><a onclick="navigateTo('contact')" id="nav-contact">CONTACT</a></li>
       </ul>
     </nav>
+    <button type="button" class="nav-toggle-btn" id="navToggleBtn" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
+      <i class="fa-solid fa-bars"></i>
+    </button>
   </header>
 
   <!-- 1. HOME SECTION (복원 완료된 메인 슬로건) -->
@@ -1311,6 +1330,30 @@
       const activeNav = document.getElementById('nav-' + pageId);
       if (activeNav) activeNav.classList.add('active');
       window.scrollTo(0, 0);
+    }
+
+    // ===== 모바일 햄버거 메뉴 =====
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      const btn = document.getElementById('navToggleBtn').querySelector('i');
+      const isOpen = nav.classList.toggle('open');
+      btn.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    }
+
+    function closeMobileMenu() {
+      const nav = document.getElementById('mainNav');
+      if (nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        document.getElementById('navToggleBtn').querySelector('i').className = 'fa-solid fa-bars';
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // 모바일에서는 메뉴 클릭 시 페이지 전환과 함께 메뉴를 닫는다.
+    function navigateTo(pageId) {
+      switchPage(pageId);
+      closeMobileMenu();
     }
   </script>
 
