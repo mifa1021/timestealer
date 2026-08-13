@@ -446,9 +446,53 @@
     @media (max-width: 992px) { .story-container { grid-template-columns: 1fr; gap: 35px; } .modal-grid { grid-template-columns: 1fr; gap: 30px; } .hero-brand-name { font-size: 2.8rem; letter-spacing: 6px; } }
     @media (max-width: 768px) {
       header { padding: 15px 5%; }
+      .nav-logo i { font-size: 1.4rem; }
+      .nav-logo span { font-size: 1.15rem; letter-spacing: 1px; }
+
+      #about, #artists, #music, #contact { padding: 110px 6% 60px 6%; }
+
+      /* HOME: 배경 영상 위 슬로건 가독성 확보 */
+      .hero-brand-name { font-size: 2.3rem; letter-spacing: 4px; margin-bottom: 14px; }
+      .hero-slogan-main { font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 10px; }
+      .hero-slogan-sub { font-size: 0.85rem; letter-spacing: 2px; }
+
+      /* ABOUT */
+      .story-title { font-size: 2rem; letter-spacing: 2px; }
+      .story-subtitle { font-size: 1.1rem; margin-bottom: 20px; }
+      .story-image-box { height: 280px; margin: 30px auto 0 auto; }
+      .story-body { font-size: 0.92rem; line-height: 1.85; }
+
+      /* Section headers shared by ARTISTS / MUSIC / CONTACT */
+      .section-header-box { margin-bottom: 36px; }
+      .artistic-title { font-size: 1.9rem !important; letter-spacing: 4px !important; }
+      .artistic-subtitle { font-size: 1rem; letter-spacing: 2px; padding-bottom: 14px; }
+
+      /* ARTISTS */
+      .artist-grid { gap: 28px; }
+      .artist-card { width: 150px; }
+      .artist-photo-box { width: 150px; height: 150px; margin-bottom: 14px; }
+      .artist-name { font-size: 1rem; }
+
+      /* MUSIC & MEDIA */
       .album-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .album-title { font-size: 1.15rem; }
+      .album-type { font-size: 0.78rem; }
+      .album-date { font-size: 0.85rem; }
+
+      /* ALBUM INFO MODAL */
+      .album-modal-box { padding: 28px 22px; }
+      .modal-album-title-text { font-size: 1.6rem; }
+      .magazine-catchphrase { font-size: 0.95rem !important; padding: 12px 16px !important; }
+      .theme-flower .modal-album-title-text { font-size: 1.9rem !important; }
+      .magazine-story-p { font-size: 0.9rem; padding: 16px; }
+      .magazine-credits-list { font-size: 0.82rem; padding: 14px 16px; }
+      .track-item { padding: 10px 14px; }
+      .track-title-wrap { font-size: 0.86rem; }
+
+      /* CONTACT */
       .form-row { grid-template-columns: 1fr; }
       .contact-tab { padding: 12px 20px; font-size: 0.85rem; }
+
       .nav-toggle-btn { display: block; }
       nav#mainNav {
         position: fixed; inset: 0; width: 100%; height: 100vh; background: rgba(11, 12, 14, 0.98);
@@ -460,7 +504,33 @@
       nav#mainNav ul { flex-direction: column; align-items: center; gap: 38px; }
       nav#mainNav a { font-size: 1.4rem; letter-spacing: 2px; }
     }
-    @media (max-width: 480px) { .album-grid { grid-template-columns: 1fr; } .streaming-btn-grid { grid-template-columns: 1fr; } .submit-success-box { padding: 40px 30px; } }
+    @media (max-width: 480px) {
+      #about, #artists, #music, #contact { padding: 100px 5% 50px 5%; }
+
+      .hero-brand-name { font-size: 1.85rem; letter-spacing: 2px; }
+      .hero-slogan-main { font-size: 1.02rem; letter-spacing: 0.5px; }
+      .hero-slogan-sub { font-size: 0.72rem; letter-spacing: 1px; }
+
+      .story-title { font-size: 1.7rem; }
+      .story-image-box { height: 220px; }
+
+      .artistic-title { font-size: 1.5rem !important; letter-spacing: 2px !important; }
+      .artistic-subtitle { font-size: 0.9rem; letter-spacing: 1px; }
+
+      .artist-grid { gap: 20px; }
+      .artist-card { width: 120px; }
+      .artist-photo-box { width: 120px; height: 120px; margin-bottom: 10px; }
+      .artist-name { font-size: 0.9rem; }
+
+      .album-grid { grid-template-columns: 1fr; }
+      .streaming-btn-grid { grid-template-columns: 1fr; }
+      .submit-success-box { padding: 40px 30px; }
+
+      .album-modal-box { padding: 22px 16px; }
+      .modal-album-title-text { font-size: 1.4rem; }
+      .theme-flower .modal-album-title-text { font-size: 1.6rem !important; }
+      .modal-album-meta-text { font-size: 0.78rem; }
+    }
   </style>
 </head>
 <body>
